@@ -21,15 +21,6 @@ var map_track;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
-
-
-$( document ).ready(function() {
-	setTimeout(function(){
-		loadRestaurantCategory(1);
-	}, 100);
-});
-
-
 function onDeviceReady() {    
 	    					
 	navigator.splashscreen.hide();
@@ -88,9 +79,6 @@ function onDeviceReady() {
 	    }); 
 	        
 	}
-
-
-
 }
 
 /*document.addEventListener("offline", onOffline, false);
@@ -4780,8 +4768,8 @@ function toastMsg( message )
 function isDebug()
 {
 	//on/off
-	return true;
-	//return false;
+	//return true;
+	return false;
 }
 
 var rzr_successCallback = function(payment_id) {

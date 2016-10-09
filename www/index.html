@@ -133,7 +133,7 @@
 </script>
 
 <script type="text/ons-template" id="home.html">
-<ons-navigator title="Navigator" var="sNavigator">
+<ons-navigator title="Navigator" var="kNavigator">
   <ons-page id="page-home" on-device-backbutton="exitKApp()" sliding-menu-ignore="true" >
         
     <ons-toolbar>
@@ -269,7 +269,7 @@
         </ons-col>
         <ons-col class="text-right">
            <a href="javascript:loadMoreReviews();" style="text-decoration:none;">
-               <div class="rating-stars" data-score=""></div>
+           <div class="rating-stars" data-score=""></div>           
            </a>
            <p class="restauran-title concat-text white"></p>           
         </ons-col>
@@ -290,7 +290,8 @@
    <ons-toolbar>        
      <div class="left"><ons-back-button id="menuitem-back-button"></ons-back-button></div>     
      <div class="center white"><span id="search-text"></span></div>           
-
+          
+     
      <div class="right">       
         <ons-toolbar-button>
         <span class="notification cart-num" onclick="showCart();" >0</span>
