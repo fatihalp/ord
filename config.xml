@@ -36,7 +36,7 @@
     <gap:plugin spec="https://github.com/razorpay/razorpay-cordova.git" source="git" />
     <gap:plugin name="cordova-plugin-media" source="npm" />
 
-    <gap:plugin name="https://github.com/mapsplugin/cordova-plugin-googlemaps.git"  source="git"  >
+    <gap:plugin name="https://github.com/mapsplugin/cordova-plugin-googlemaps.git"  source="git"  spec="1.4.0" >
         <param name="API_KEY_FOR_ANDROID" value="AIzaSyBCULSf3P3Q3O6ufqx58E80Y5BWNtuITOI" />
         <param name="API_KEY_FOR_IOS" value="AIzaSyCC6lleNp7mLBhRbgDZoaDWb64Q-OZ-jWI" />
     </gap:plugin>
