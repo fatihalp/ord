@@ -72,9 +72,7 @@
   <div class="myloader"></div>    
 </ons-modal>
 
-<!--<ons-sliding-menu main-page="home.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
-</ons-sliding-menu>-->
-<ons-sliding-menu main-page="browseRestaurant.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
+<ons-sliding-menu main-page="home.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
 </ons-sliding-menu>
 
 <script type="text/ons-template" id="menu.html">
@@ -91,9 +89,9 @@
   </div>
   
   <ons-list class="main-menu-list">
-    <!--<ons-list-item onclick="setHome();" class="bottom-menu-item" >
+    <ons-list-item onclick="setHome();" class="bottom-menu-item" >
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
-    </ons-list-item>-->
+    </ons-list-item>
     
     <!--<ons-list-item onclick="menu.setMainPage('browseRestaurant.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
@@ -300,7 +298,7 @@
         <ons-icon icon="fa-shopping-cart" onclick="showCart();" class="cart"></ons-toolbar-button>
         
         <ons-toolbar-button onclick="showEasyCategory(this);">
-           <ons-icon icon="ion-android-more-vertical" size="30px"></ons-icon>
+           <ons-icon icon="ion-ios-list" size="30px"></ons-icon>
         </ons-toolbar-button>
         
      </div>
@@ -423,11 +421,18 @@
    <div class="wrapper">
      <p class="p-normal pts_earn_label"></p>
    </div>
+      
    
    <ons-list>       
+   
+       <ons-list-item modifier="chevron" onclick="showTip();" class="tip_amount_wrap" > 
+       <span class="trn tip_amount" data-trn-key="tip_amount">Tip Amount</span>       
+       </ons-list-item>    
+       
        <ons-list-item modifier="chevron" onclick="showChangeAddressPage();" > 
        <span class="trn" data-trn-key="change_your_address">Change your address here</span>       
        </ons-list-item>    
+       
    </ons-list>       
       
    <button class="button green-btn button--large trn" onclick="checkOut();" data-trn-key="checkout">
@@ -589,6 +594,10 @@
    <input type="hidden" name="city" class="city">
    <input type="hidden" name="state" class="state">   
    <input type="hidden" name="zipcode" class="zipcode">  
+   
+   <input type="hidden" name="formatted_address" class="formatted_address">  
+   <input type="hidden" name="google_lat" class="google_lat">  
+   <input type="hidden" name="google_lng" class="google_lng">  
    
    <div class="wrapper">
       <div class="field-wrapper">
@@ -1051,15 +1060,13 @@
 
 <script type="text/ons-template" id="browseRestaurant.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
-<!--<ons-page id="page-browse" on-device-backbutton="backtoHome()" >-->
-  <ons-page id="page-browse" on-device-backbutton="exitKApp()" sliding-menu-ignore="true" >
+<ons-page id="page-browse" on-device-backbutton="backtoHome()" >
    <ons-toolbar>     
    
     <div class="left">
-     <!--<ons-toolbar-button onclick="setHome();">
+     <ons-toolbar-button onclick="setHome();">
         <ons-icon icon="fa-chevron-left"></ons-icon>
-     </ons-toolbar-button>        -->
-     <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button> 
+     </ons-toolbar-button>        
     </div> 
          
     <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Browse Restaurant</span></div>           
@@ -1068,7 +1075,7 @@
       <ons-toolbar-button><ons-icon icon="fa-search" onclick="showFilterResto();"></ons-toolbar-button>
     </div>
         
-   </ons-toolbar>  
+   </ons-toolbar>
    
    <div class="results-header arrow_box"><span class="result-msg trn" data-trn-key="processing">processing</span></div>
    
@@ -2194,20 +2201,21 @@
      </div>
    </ons-toolbar>
    
+   <input type="hidden" name="change_cemara_action" class="change_cemara_action">
+   <input type="hidden" name="change_cemara_lat" class="change_cemara_lat">
+   <input type="hidden" name="change_cemara_lng" class="change_cemara_lng">
+   
+   <div class="map_search_field_wrap">      
+      <ons-icon icon="ion-ios-search" modifier="iconsearch" ></ons-icon>
+      <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" >
+   </div>
+   
    <div id="map_canvas_address">   
 
        <div class="list-wrapper" id="direction-wrap">
-         <ons-list>
-           <ons-list-item  modifier="task-list"  >
-                       
-            <ons-row>
-            <ons-button class="button green-btn button--large" onclick="useThisLocation()" >
-              <span class="trn" data-trn-key="use_this_address">Use this address</span>
-             </ons-button>          
-            </ons-row>
-           
-           </ons-list-item>
-         </ons-list>
+             <ons-button class="button green-btn button--large" onclick="useThisLocation()" >
+              <span class="trn use-location" data-trn-key="use_this_address">Use this address</span>
+             </ons-button>    
         </div>
      
    </div> 
@@ -2317,10 +2325,10 @@
 
 
 <script type="text/ons-template" id="tracking-page.html">   
-<ons-page id="tracking-page" modifier="tracking-page" >
+<ons-page id="tracking-page" modifier="tracking-page" on-device-backbutton="reRunTrackOrder2();" >
   
    <ons-toolbar>        
-     <div class="left"><ons-back-button></ons-back-button></div>                      
+     <div class="left"><ons-back-button onclick="reRunTrackOrder();"></ons-back-button></div>                      
      <div class="center white">
      <span class="trn" data-trn-key="track_driver" >
       Track Driver
@@ -2387,5 +2395,135 @@
 
 </ons-page>
 </script>
+
+
+<script type="text/ons-template" id="tipsDialog.html">    
+  <ons-dialog var="tipsDialog" style="width:60%;height:290px;" cancelable  >
+
+  <ons-page id="page-tips" >  
+	  <ons-toolbar> 
+	      <div class="center white trn" data-trn-key="select_tips">Select Tips</div>   	      	      
+	  </ons-toolbar>
+
+	  <ons-list>
+	    <ons-list-item modifier="tappable" onclick="setTips(10);" >
+	      10%
+	    </ons-list-item>
+	    <ons-list-item modifier="tappable" onclick="setTips(15);" >
+	      15%
+	    </ons-list-item>
+	    <ons-list-item modifier="tappable" onclick="setTips(20);" >
+	      20%
+	    </ons-list-item>
+	    <ons-list-item modifier="tappable" onclick="setTips(25);" >
+	      25%
+	    </ons-list-item>
+	    <ons-list-item modifier="tappable" onclick="removeTips();" >
+	      <span class="trn" data-trn-key="remove_tips" >Remove Tips</span>
+	    </ons-list-item>
+	  </ons-list>
+	  
+  </ons-page>
+  </ons-dialog> 
+</script>
+
+
+
+
+<script type="text/ons-template" id="cclist.html">   
+<ons-page id="page-cclist" >
+  
+  <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>                      
+     <div class="center white">
+     <span class="trn" data-trn-key="credit_card" >
+       Credit Card
+     </span>
+     </div>
+     
+     <div class="right">
+       <ons-toolbar-button onclick="showCCForm();" ><ons-icon icon="ion-plus-round"></ons-toolbar-button>
+     </div>
+   </ons-toolbar>
+   
+  <ons-scroller >
+    <ons-list id="cc-list" >
+    </ons-list>
+   </ons-scroller> 
+   
+</ons-page>
+</script>   
+
+
+
+<script type="text/ons-template" id="ccform.html">   
+<ons-page id="page-ccform" >
+  
+  <ons-toolbar>        
+     <div class="left"><ons-back-button></ons-back-button></div>                      
+     <div class="center white">
+     <span class="trn" data-trn-key="add_credit_card" >
+       Add Credit Card 
+     </span>
+     </div>          
+   </ons-toolbar>
+   
+    <div class="wrapper">
+    <form id="frm-cc" class="frm-cc" method="post">
+          
+      <input type="hidden" name="expiration_month" class="expiration_month" id="expiration_month">
+      <input type="hidden" name="expiration_yr" class="expiration_yr" id="expiration_yr">
+      <input type="hidden" name="cc_id" class="cc_id" id="cc_id">
+      
+      <div class="field-wrapper">
+      <input type="text" name="card_name"  class="card_name text-input text-input--underbar has_validation" 
+      placeholder="Card name" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div>
+   
+     <div class="field-wrapper">
+      <input type="text" name="cc_number"  class="cc_number limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="Credit Card Number" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="16"  data-maxl="16" >
+      </div>
+      
+     <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showExpirationMonth();" class="trn expiration_month_label" data-trn-key="expiration_month">
+         Expiration Month
+        </ons-list-item>        
+      </ons-list>
+      
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="showExpirationYear();" class="trn expiration_year" data-trn-key="expiration_year">
+         Expiration Year
+        </ons-list-item>        
+      </ons-list>
+     
+     <div class="field-wrapper">
+      <input type="text" name="cvv"  class="cvv limit_char numeric_only text-input text-input--underbar has_validation" 
+      placeholder="CVV" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" maxlength="4" data-maxl="4" >
+      </div>
+      
+     <div class="field-wrapper">
+      <input type="text" name="billing_address"  class="billing_address text-input text-input--underbar has_validation" 
+      placeholder="Billing Address" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
+      </div> 
+      
+     <button class="trn button green-btn button--large" onclick="saveCC();" data-trn-key="save">
+		Save
+		<div class="search-btn"><ons-icon icon="ion-checkmark-round"></ons-icon></div>
+	 </button>  
+
+	 <br/> 
+	 
+     <button class="trn button button--large delete-cc" onclick="deleteCC();" data-trn-key="delete">
+		Delete		
+	 </button>  
+	  
+	  
+      
+   </form>	  
+   </div>
+   
+</ons-page>
+</script>   
 
 </body>

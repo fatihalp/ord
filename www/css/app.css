@@ -842,7 +842,8 @@ background:rgba(0,0,0,0) !important;
 bottom: 0px;
 position: absolute;
 width: 95%;
-z-index: 999999 !important;
+z-index: 99999 !important;
+background:#fff;
 }
 
 .list-wrapper{
@@ -1019,4 +1020,33 @@ background:#fc8344;
 }
 .notification.started{
 background:#ba68c8;
+}
+
+.map_search_field_wrap{
+background:#fff;
+position:relative;
+}
+
+.map_search_field_wrap .ons-icon{
+left: 15px;
+position: absolute;
+top: 7px;
+}
+
+#search_address_geo{
+height: 40px;
+padding: 5px 20px;
+width: 100%;
+text-indent:20px;
+}
+
+#map_canvas_address{
+position:relative;
+}
+
+#menucategory-page .restauran-title.concat-text,
+#page-menubycategoryitem .restauran-title.concat-text
+{
+max-width:220px;
+white-space: inherit;
 }
