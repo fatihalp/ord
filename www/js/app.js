@@ -1566,7 +1566,8 @@ function setHome()
 	      animation: 'slide',
 	      callback:setHomeCallback
 	   };	   	   	   
-	 menu.setMainPage('home.html',options);
+	//  menu.setMainPage('home.html',options);
+	menu.setMainPage('browseRestaurant.html',options);
 }
 
 function setHomeCallback()
@@ -4666,7 +4667,8 @@ function backtoHome()
   	  closeMenu:true,
       animation: 'slide'	    
    };	   	   	   
-   menu.setMainPage('home.html',options);
+//    menu.setMainPage('home.html',options);
+   menu.setMainPage('browseRestaurant.html',options);
 }
 
 function exitKApp()

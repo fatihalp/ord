@@ -72,7 +72,9 @@
   <div class="myloader"></div>    
 </ons-modal>
 
-<ons-sliding-menu main-page="home.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
+<!--<ons-sliding-menu main-page="home.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
+</ons-sliding-menu>-->
+<ons-sliding-menu main-page="browseRestaurant.html" menu-page="menu.html" side="left" var="menu" close-on-tap type="push" >
 </ons-sliding-menu>
 
 <script type="text/ons-template" id="menu.html">
@@ -89,14 +91,14 @@
   </div>
   
   <ons-list class="main-menu-list">
-    <ons-list-item onclick="setHome();" class="bottom-menu-item" >
+    <!--<ons-list-item onclick="setHome();" class="bottom-menu-item" >
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
-    </ons-list-item>
+    </ons-list-item>-->
     
-    <ons-list-item onclick="menu.setMainPage('browseRestaurant.html', {closeMenu: true})" class="bottom-menu-item">
+    <!--<ons-list-item onclick="menu.setMainPage('browseRestaurant.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
       <span class="trn" data-trn-key="browse_resto">Browse Restaurant</span>
-    </ons-list-item>
+    </ons-list-item>-->
     
     <ons-list-item onclick="showProfile();" class="bottom-menu-item">
       <ons-icon icon="ion-android-contact"></ons-icon> 
@@ -1049,13 +1051,15 @@
 
 <script type="text/ons-template" id="browseRestaurant.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
-<ons-page id="page-browse" on-device-backbutton="backtoHome()" >
+<!--<ons-page id="page-browse" on-device-backbutton="backtoHome()" >-->
+  <ons-page id="page-browse" on-device-backbutton="exitKApp()" sliding-menu-ignore="true" >
    <ons-toolbar>     
    
     <div class="left">
-     <ons-toolbar-button onclick="setHome();">
+     <!--<ons-toolbar-button onclick="setHome();">
         <ons-icon icon="fa-chevron-left"></ons-icon>
-     </ons-toolbar-button>        
+     </ons-toolbar-button>        -->
+     <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button> 
     </div> 
          
     <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Browse Restaurant</span></div>           
@@ -1064,7 +1068,7 @@
       <ons-toolbar-button><ons-icon icon="fa-search" onclick="showFilterResto();"></ons-toolbar-button>
     </div>
         
-   </ons-toolbar>
+   </ons-toolbar>  
    
    <div class="results-header arrow_box"><span class="result-msg trn" data-trn-key="processing">processing</span></div>
    
